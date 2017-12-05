@@ -18,7 +18,7 @@ namespace AlexList
         //{
 
         //}
-        public void SaveStoredValue(T value)
+        public void AddValue(T value)
         {
 
         }
