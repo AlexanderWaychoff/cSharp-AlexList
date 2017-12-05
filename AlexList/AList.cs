@@ -8,15 +8,22 @@ namespace AlexList
 {
     public class AList<T>
     {
-        internal class IndexerClass
+        protected class IndexerClass
         {
-            private T[] values = new T[0];//adjust value with constructor later
-            ///public T this[int i]
-            //{
-                //get set
-            //}
+            private T[] AList = new T[0];//adjust value with constructor later
+            public T this[int i]
+            {
+                get
+                {
+                    return AList[i];
+                }
+                set
+                {
+                    AList[i] = value;
+                }
+            }
         }
-        IndexerClass test = new IndexerClass();//add constructor to create length here
+        IndexerClass AList = new IndexerClass();//add constructor to create length here
 
 
         //array has a fixed length, contains a specific type of data, and contained data is 
@@ -40,11 +47,11 @@ namespace AlexList
         }
         public void Add(T value)
         {
-
+            AList[0] = value;
         }
-        public void Remove(T value)
+        public bool Remove(T value)
         {
-
+            return true;
         }
         public void RemoveAt(int value)
         {

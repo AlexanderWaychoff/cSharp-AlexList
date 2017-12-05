@@ -194,6 +194,62 @@ namespace AListTests
             //assert
             Assert.AreEqual(listOfValues[0], doNotRemove);
         }
+        public void Remove_RemoveFromAList_ReturnTrue()
+        {
+            //arrange
+            string removeThis = "remove";
+            bool hasRemoved;
+            AList<string> listOfValues = new AList<string>();// { "test", removeThis, "fill" };
+            listOfValues.Add("test");
+            listOfValues.Add(removeThis);
+            listOfValues.Add("fill");
+            //act
+            hasRemoved = listOfValues.Remove(removeThis);
+            //assert
+            Assert.IsTrue(hasRemoved);
+        }
+        public void Remove_DoNotRemoveFromAList_ReturnFalse()
+        {
+            //arrange
+            string removeThis = "remove";
+            bool hasRemoved;
+            AList<string> listOfValues = new AList<string>();// { "test", removeThis, "fill" };
+            listOfValues.Add("test");
+            listOfValues.Add("extra");
+            listOfValues.Add("fill");
+            //act
+            hasRemoved = listOfValues.Remove(removeThis);
+            //assert
+            Assert.IsFalse(hasRemoved);
+        }
+        public void Remove_CheckIndex0_ValueIsThere()
+        {
+            //arrange
+            string test = "test";
+            string removeThis = "remove";
+            AList<string> listOfValues = new AList<string>();// { "test", removeThis, "fill" };
+            listOfValues.Add(test);
+            listOfValues.Add(removeThis);
+            listOfValues.Add("fill");
+            //act
+            listOfValues.Remove(removeThis);
+            //assert
+            Assert.AreNotEqual(listOfValues[0], test);
+        }
+        public void Remove_CheckIndex2_ValueIsThere()
+        {
+            //arrange
+            string test = "test";
+            string removeThis = "remove";
+            AList<string> listOfValues = new AList<string>();// { "test", removeThis, "fill" };
+            listOfValues.Add("fill");
+            listOfValues.Add(removeThis);
+            listOfValues.Add(test);
+            //act
+            listOfValues.Remove(removeThis);
+            //assert
+            Assert.AreNotEqual(listOfValues[2], test);
+        }
 
         //AList RemoveAt 
         [TestMethod]
@@ -304,14 +360,15 @@ namespace AListTests
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void IndexOf_CheckIndex5_ThrowException()
+        public void Insert_IntoIndex5_ThrowException()
         {
             //arrange
-            AList<string> listOfValues = new AList<string>();
+            string test = "Exception";
+            AList <string> listOfValues = new AList<string>();
             listOfValues.Add("fill");
             listOfValues.Add("fill");
             //act
-            string test = listOfValues.IndexOf(5);
+            listOfValues.Insert(5, test);
             //assert
         }
 
