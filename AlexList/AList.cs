@@ -10,7 +10,7 @@ namespace AlexList
     {
         protected class IndexerClass
         {
-            private T[] AList = new T[0];//adjust value with constructor later
+            private T[] AList = new T[1];//adjust value with constructor later
             public T this[int i]
             {
                 get
@@ -23,7 +23,7 @@ namespace AlexList
                 }
             }
         }
-        IndexerClass AList = new IndexerClass();//add constructor to create length here
+        IndexerClass NList;// = new IndexerClass();//add constructor to create length here
 
 
         //array has a fixed length, contains a specific type of data, and contained data is 
@@ -33,21 +33,21 @@ namespace AlexList
         public int listLength = 0;
         private int count = 0;
 
-        public int Count
-        {
-            get 
-            {
-                return count;
-            }
-        }
+        //public int Count
+        //{
+        //    get 
+        //    {
+        //        return count;
+        //    }
+        //}
 
         public AList()
         {
-
+            this.NList = new IndexerClass();
         }
         public void Add(T value)
         {
-            AList[0] = value;
+            NList[0] = value;
         }
         public bool Remove(T value)
         {
@@ -71,7 +71,7 @@ namespace AlexList
         }
         public T IndexOf(int i)
         {
-            return T;
+            return NList[i];
         }
     }
 }
