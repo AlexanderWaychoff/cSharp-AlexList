@@ -58,5 +58,13 @@ namespace AlexList
         {
 
         }
+        public void Insert(int i, T value)
+        {
+
+        }
+        public T IndexOf(int i)
+        {
+            return T;
+        }
     }
 }

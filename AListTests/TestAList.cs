@@ -80,12 +80,13 @@ namespace AListTests
         public void Add_AddToAList_CountGoesTo2()
         {
             //arrange
-            AList<string> listOfValues = new AList<string>() {"fill"};
+            AList<string> listOfValues = new AList<string>();// {"fill"};
             string value = "test";
+            listOfValues.Add("fill");
             //act
             listOfValues.Add(value);
             //assert
-            Assert.AreEqual(listOfValues.listLength, 2);
+            Assert.AreEqual(listOfValues.Count(), 2);
         }
         [TestMethod]
         public void Add_CheckIndex0_Index0EqualsValue()
@@ -101,8 +102,9 @@ namespace AListTests
         public void Add_CheckIndex1_Index1EqualsValue()
         {
             //arrange
-            AList<string> listOfValues = new AList<string>() {"fill"};
+            AList<string> listOfValues = new AList<string>();
             string value = "test";
+            listOfValues.Add("fill");
             //act
             listOfValues.Add(value);
             //assert
@@ -130,7 +132,10 @@ namespace AListTests
         public void Count_CheckAListLength_CountEqualsAListLength()
         {
             //arrange
-            AList<string> listOfValues = new AList<string>() { "test", "fill" };
+            //AList<string> listOfValues = new AList<string>() { "test", "fill" };
+            AList<string> listOfValues = new AList<string>();
+            listOfValues.Add("test");
+            listOfValues.Add("fill");
             //act
             int lengthOfAList = listOfValues.Count();
             //assert
@@ -140,7 +145,9 @@ namespace AListTests
         public void Count_PropertyUsageForCount_CountEqualsAListLength()
         {
             //arrange
-            AList<string> listOfValues = new AList<string>() { "test", "fill" };
+            AList<string> listOfValues = new AList<string>();// { "test", "fill" };
+            listOfValues.Add("test");
+            listOfValues.Add("fill");
             //act
             int lengthOfAList = listOfValues.Count;
             //assert
@@ -149,26 +156,41 @@ namespace AListTests
 
         //Alist Remove
         [TestMethod]
-        public void Remove_RemoveFromAList_CountGoesDown()
+        public void Remove_RemoveFromAList_IndexIsRemoved()
         {
             //arrange
             string removeThis = "remove";
-            AList<string> listOfValues = new AList<string>() { "test", removeThis, "fill" };
+            AList<string> listOfValues = new AList<string>();// { "test", removeThis, "fill" };
+            listOfValues.Add("test");
+            listOfValues.Add(removeThis);
+            listOfValues.Add("fill");
             //act
             listOfValues.Remove(removeThis);
             //assert
             Assert.AreNotEqual(listOfValues[1], removeThis);
         }
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void Remove_RemoveFromAList_ExceptionCheckingPastLength()
+        public void Remove_RemoveFromAList_KeepValueAtIndex1()
         {
             //arrange
             string remove = "remove";
             string doNotRemove = "keep";
-            AList<string> listOfValues = new AList<string>() { remove, doNotRemove };
+            AList<string> listOfValues = new AList<string>();// { remove, doNotRemove };
+            listOfValues.Add(remove);
+            listOfValues.Add(doNotRemove);
             //act
             listOfValues.Remove(remove);
+            //assert
+            Assert.AreEqual(listOfValues[0], doNotRemove);
+        }
+        public void Remove_DoNotRemove_KeepValueAtIndex0()
+        {
+            //arrange
+            string doNotRemove = "keep";
+            AList<string> listOfValues = new AList<string>();// { remove, doNotRemove };
+            listOfValues.Add(doNotRemove);
+            //act
+            listOfValues.Remove("remove");
             //assert
             Assert.AreEqual(listOfValues[0], doNotRemove);
         }
@@ -179,7 +201,10 @@ namespace AListTests
         {
             //arrange
             string item = "Expected to be removed";
-            AList<string> listOfValues = new AList<string>() { "test", item, "fill" };
+            AList<string> listOfValues = new AList<string>();// { "test", item, "fill" };
+            listOfValues.Add("test");
+            listOfValues.Add(item);
+            listOfValues.Add("fill");
             //act
             listOfValues.RemoveAt(1);
             //assert
@@ -190,7 +215,10 @@ namespace AListTests
         {
             //arrange
             string item = "Expected value";
-            AList<string> listOfValues = new AList<string>() { "test", "fill", item };
+            AList<string> listOfValues = new AList<string>();// { "test", "fill", item };
+            listOfValues.Add("test");
+            listOfValues.Add("fill");
+            listOfValues.Add(item);
             //act
             listOfValues.RemoveAt(1);
             //assert
@@ -201,7 +229,9 @@ namespace AListTests
         public void RemoveAt_RemoveFromAList_ExceptionCheckingPastLength()
         {
             //arrange
-            AList<string> listOfValues = new AList<string>() { "test", "fill" };
+            AList<string> listOfValues = new AList<string>();// { "test", "fill" };
+            listOfValues.Add("test");
+            listOfValues.Add("fill");
             //act
             listOfValues.RemoveAt(5);
             //assert
@@ -212,12 +242,119 @@ namespace AListTests
         public void Clear_ClearsList_AListHasNoValue()
         {
             //arrange
-            string item = "Expected value";
-            AList<string> listOfValues = new AList<string>() { item };
+            string item = "Remove this";
+            AList<string> listOfValues = new AList<string>();// { item };
+            listOfValues.Add(item);
             //act
             listOfValues.Clear();
             //assert
-            Assert.AreNotEqual(listOfValues.Count(), 0);
+            Assert.AreEqual(listOfValues.Count(), 0);
+        }
+
+        //AList Insert
+        [TestMethod]
+        public void Insert_PutValueAtIndex0_AListIndex0Changes()
+        {
+            //arrange
+            string item = "Expected value";
+            AList<string> listOfValues = new AList<string>();
+            listOfValues.Add("fill");
+            //act
+            listOfValues.Insert(0, item);
+            //assert
+            Assert.AreEqual(listOfValues[0], item);
+        }
+        [TestMethod]
+        public void Insert_PutValueAtIndex0_AListIndex1IsThere()
+        {
+            //arrange
+            string item = "Expected value";
+            AList<string> listOfValues = new AList<string>();
+            listOfValues.Add(item);
+            //act
+            listOfValues.Insert(0, "fill");
+            //assert
+            Assert.AreEqual(listOfValues[1], item);
+        }
+        [TestMethod]
+        public void Insert_PutValueAtIndex1_AListIndex0IsThere()
+        {
+            //arrange
+            string item = "Expected value";
+            AList<string> listOfValues = new AList<string>();
+            listOfValues.Add(item);
+            listOfValues.Add("fill");
+            //act
+            listOfValues.Insert(1, "fill");
+            //assert
+            Assert.AreEqual(listOfValues[0], item);
+        }
+        [TestMethod]
+        public void Insert_PutValueAtIndex1_AListIndex2IsThere()
+        {
+            //arrange
+            string item = "Expected value";
+            AList<string> listOfValues = new AList<string>();
+            listOfValues.Add("fill");
+            listOfValues.Add(item);
+            //act
+            listOfValues.Insert(1, "fill");
+            //assert
+            Assert.AreEqual(listOfValues[2], item);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IndexOf_CheckIndex5_ThrowException()
+        {
+            //arrange
+            AList<string> listOfValues = new AList<string>();
+            listOfValues.Add("fill");
+            listOfValues.Add("fill");
+            //act
+            string test = listOfValues.IndexOf(5);
+            //assert
+        }
+
+        //AList IndexOf
+        [TestMethod]
+        public void IndexOf_CheckIndex0_AListIndex0EqualsValue()
+        {
+            //arrange
+            string value = "Expected value";
+            AList<string> listOfValues = new AList<string>();
+            listOfValues.Add(value);
+            listOfValues.Add("fill");
+            listOfValues.Add("fill");
+            //act
+            string test = listOfValues.IndexOf(0);
+            //assert
+            Assert.AreEqual(listOfValues[0], value);
+        }
+        [TestMethod]
+        public void IndexOf_CheckIndex1_AListIndex1EqualsValue()
+        {
+            //arrange
+            string value = "Expected value";
+            AList<string> listOfValues = new AList<string>();
+            listOfValues.Add("fill");
+            listOfValues.Add(value);
+            listOfValues.Add("fill");
+            //act
+            string test = listOfValues.IndexOf(1);
+            //assert
+            Assert.AreEqual(listOfValues[1], value);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IndexOf_CheckIndex5_ThrowException()
+        {
+            //arrange
+            AList<string> listOfValues = new AList<string>();
+            listOfValues.Add("fill");
+            listOfValues.Add("fill");
+            //act
+            string test = listOfValues.IndexOf(5);
+            //assert
         }
     }
 }
