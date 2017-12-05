@@ -1,1 +1,6 @@
 C:\Users\Andross\Desktop\school_projects\C#\AlexList\AlexList\bin\Debug\AlexList.exe.config
+C:\Users\Andross\Desktop\school_projects\C#\AlexList\AlexList\obj\Debug\AlexList.csprojResolveAssemblyReference.cache
+C:\Users\Andross\Desktop\school_projects\C#\AlexList\AlexList\bin\Debug\AlexList.exe
+C:\Users\Andross\Desktop\school_projects\C#\AlexList\AlexList\bin\Debug\AlexList.pdb
+C:\Users\Andross\Desktop\school_projects\C#\AlexList\AlexList\obj\Debug\AlexList.exe
+C:\Users\Andross\Desktop\school_projects\C#\AlexList\AlexList\obj\Debug\AlexList.pdb
