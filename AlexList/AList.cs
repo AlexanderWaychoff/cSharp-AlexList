@@ -157,6 +157,10 @@ namespace AlexList
         {
             return NList[i];
         }
+        public override string ToString()
+        {
+            return base.ToString();
+        }
 
         public IEnumerator<T> GetEnumerator()
         {          

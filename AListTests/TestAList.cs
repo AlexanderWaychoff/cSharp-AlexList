@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AlexList;
+using System.Collections.Generic;
 
 namespace AListTests
 {
@@ -285,6 +286,22 @@ namespace AListTests
             }
             //assert
             Assert.AreEqual(grabValues[1], grab);
+        }
+
+        //Override ToString
+        [TestMethod]
+        public void ToString_ObserveEffects_UnderstandWhatHappens()
+        {
+            //arrange
+            //AList<int> listOfValues = new AList<int>() { 1, 2, 3 };
+            List<int> tests = new List<int>() { 1, 2, 3, 4 };
+            int test = 2;
+            string grab;
+            //act
+            //grab = listOfValues.ToString();
+            grab = tests[0].ToString();
+            //assert
+            Assert.AreEqual(grab, "1");
         }
 
         //AList RemoveAt 
