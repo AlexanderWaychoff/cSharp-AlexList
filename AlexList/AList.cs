@@ -13,6 +13,9 @@ namespace AlexList
     {
         private T[] NList;
         private int startingCapacity = 6;
+        private int count = 0;
+        private int index = 0;
+        private int capacity = 6;
         public T this[int i]
         {
             get
@@ -24,15 +27,44 @@ namespace AlexList
                 NList[i] = value;
             }
         }
-        //ctor
-        public AList(AList<T> content = null)
+        public int Count
         {
-            int capacity = DetermineCapacity(content);
-            NList = new T[capacity];
-            if(!(content == null))
+            get
             {
-                ReplaceArray(capacity, content);
+                return count;
             }
+            set
+            {
+                count = value;
+            }
+        }
+        public int Index
+        {
+            get
+            {
+                return index;
+            }
+            set
+            {
+                index = value;
+            }
+        }
+        public int Capacity
+        {
+            get
+            {
+                return capacity;
+            }
+            set
+            {
+                capacity = value;
+            }
+        }
+        //ctor
+        public AList()//T[]    //AList<T>
+        {
+            this.capacity = startingCapacity;
+            NList = new T[capacity];
         }
         //GetEnumerator
         public IEnumerator<T> GetEnumerable()
@@ -41,37 +73,35 @@ namespace AlexList
         }
 
         //methods
-        public void ReplaceArray(int capacity, AList<T> replacedList)
+        public void ReplaceArray(int capacity, T[] replacedList)
         {
-            for (int i = 0; i < capacity; i++)
+            for (int i = 0; i < Capacity/2; i++)
             {
-                NList[i] = replacedList[i];
+                replacedList[i] = NList[i];
+            }
+        }
+        public void CheckCapacity()
+        {
+            if (Index >= Capacity/2)
+            {
+                CreateNewArray();
             }
         }
         public void CreateNewArray()
         {
-
+            T[] replacedList = new T[IncreaseCapacity()];
         }
-        public int DetermineCapacity(AList<T> previousArray = null)
+        public int IncreaseCapacity()
         {
-            int capacity = 0;
-            if (previousArray == null)
-            {
-                capacity = startingCapacity;
-            }
-            else
-            {
-                foreach (var item in previousArray)
-                {
-                    capacity += 1;
-                }
-                capacity *= 2;
-            }
+            int capacity = Capacity;
+            capacity *= 2;
             return capacity;
         }
         public void Add(T value)
         {
-            NList[0] = value;
+            Count += 1;
+            Index = Count - 1;
+            NList[Index] = value;
         }
         public bool Remove(T value)
         {
@@ -81,10 +111,10 @@ namespace AlexList
         {
 
         }
-        public int Count()
-        {
-            return 0;
-        }
+        //public int Count()
+        //{
+        //    return 0;
+        //}
         public void Clear()
         {
 

@@ -9,7 +9,19 @@ namespace AListTests
     {
         //DetermineCapacity
         [TestMethod]
-        public void DetermineCapacity_CountAvailableSpaces_Assert5()
+        public void DetermineCapacity_CountAvailableSpaces_Assert6()
+        {
+            //arrange
+            AList<int> test = new AList<int>();
+            test.Add(1);
+            test.Add(2);
+            //act
+            int capacity = test.IncreaseCapacity();
+            //assert
+            Assert.AreEqual(capacity, 6);
+        }
+        [TestMethod]
+        public void DetermineCapacity_CapacityIncreasesFromThreshold_Assert12()
         {
             //arrange
             AList<int> test = new AList<int>();
@@ -17,9 +29,9 @@ namespace AListTests
             test.Add(2);
             test.Add(3);
             //act
-            int capacity = test.DetermineCapacity();
+            int capacity = test.IncreaseCapacity();
             //assert
-            Assert.AreEqual(capacity, 5);
+            Assert.AreEqual(capacity, 12);
         }
         //Alist AddToList
         [TestMethod]
@@ -43,7 +55,7 @@ namespace AListTests
             //act
             listOfValues.Add(value);
             //assert
-            Assert.AreEqual(listOfValues.Count(), 2);
+            Assert.AreEqual(listOfValues.Count, 2);
         }
         [TestMethod]
         public void Add_CheckIndex0_Index0EqualsValue()
@@ -94,7 +106,7 @@ namespace AListTests
             listOfValues.Add("test");
             listOfValues.Add("fill");
             //act
-            int lengthOfAList = listOfValues.Count();
+            int lengthOfAList = listOfValues.Count;
             //assert
             Assert.AreEqual(lengthOfAList, 2);
         }
@@ -261,7 +273,7 @@ namespace AListTests
             //act
             listOfValues.Clear();
             //assert
-            Assert.AreEqual(listOfValues.Count(), 0);
+            Assert.AreEqual(listOfValues.Count, 0);
         }
 
         //AList Insert
