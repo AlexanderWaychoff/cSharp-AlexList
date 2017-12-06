@@ -9,7 +9,7 @@ namespace AlexList
     public class IndexerClass<T>
     {
         //int AListLength = 0;
-        public T[] AList = new T[0];
+        private T[] AList = new T[0];
         public T this[int i]
         {
             get

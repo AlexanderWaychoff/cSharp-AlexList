@@ -7,63 +7,6 @@ namespace AListTests
     [TestClass]
     public class TestAList
     {
-        //StoredValue AddValue
-        [TestMethod]
-        public void AddValue_SaveString_isTypeString()
-        {
-            //arrange
-            StoredValue<string> saveValue = new StoredValue<string>();
-            string value = "test";
-            //act
-            saveValue.AddValue(value);
-            //assert
-            Assert.AreEqual(saveValue.value, value);
-        }
-        [TestMethod]
-        public void AddValue_SaveInt_isTypeInt()
-        {
-            //arrange
-            StoredValue<int> saveValue = new StoredValue<int>();
-            int value = 27;
-            //act
-            saveValue.AddValue(value);
-            //assert
-            Assert.AreEqual(saveValue.value, value);
-        }
-        [TestMethod]
-        public void AddValue_SaveDouble_isTypeDouble()
-        {
-            //arrange
-            StoredValue<double> saveValue = new StoredValue<double>();
-            double value = 10.77;
-            //act
-            saveValue.AddValue(value);
-            //assert
-            Assert.AreEqual(saveValue.value, value);
-        }
-        [TestMethod]
-        public void AddValue_SaveObjectName_isTypeObjectsName()
-        {
-            //arrange
-            StoredValue<ObjectTest> saveValue = new StoredValue<ObjectTest>();
-            ObjectTest obj = new ObjectTest(1, "meepstick");
-            //act
-            saveValue.AddValue(obj);
-            //assert
-            Assert.AreEqual(saveValue.value.name, obj.name);
-        }
-        [TestMethod]
-        public void AddValue_SaveObjectSize_isTypeObjectsSize()
-        {
-            //arrange
-            StoredValue<ObjectTest> saveValue = new StoredValue<ObjectTest>();
-            ObjectTest obj = new ObjectTest(1, "meepstick");
-            //act
-            saveValue.AddValue(obj);
-            //assert
-            Assert.AreEqual(saveValue.value.size, obj.size);
-        }
-
         //Alist AddToList
         [TestMethod]
         public void Add_AddToAList_Index0EqualsValue()
