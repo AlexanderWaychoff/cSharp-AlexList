@@ -10,8 +10,7 @@ namespace AlexList
     {
         static void Main(string[] args)
         {
-            AList<string> AList = new AList<string>();
-            AList.Add("test");
+
         }
     }
 }

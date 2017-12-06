@@ -7,6 +7,20 @@ namespace AListTests
     [TestClass]
     public class TestAList
     {
+        //DetermineCapacity
+        [TestMethod]
+        public void DetermineCapacity_CountAvailableSpaces_Assert5()
+        {
+            //arrange
+            AList<int> test = new AList<int>();
+            test.Add(1);
+            test.Add(2);
+            test.Add(3);
+            //act
+            int capacity = test.DetermineCapacity();
+            //assert
+            Assert.AreEqual(capacity, 5);
+        }
         //Alist AddToList
         [TestMethod]
         public void Add_AddToAList_Index0EqualsValue()
