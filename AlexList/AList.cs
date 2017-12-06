@@ -16,6 +16,7 @@ namespace AlexList
         private int count = 0;
         private int index = 0;
         private int capacity = 6;
+        private int removedIndex = 0;
         public T this[int i]
         {
             get
@@ -64,24 +65,32 @@ namespace AlexList
         public AList()//T[]    //AList<T>
         {
             this.capacity = startingCapacity;
+            this.Count = 0;
             NList = new T[capacity];
-        }
-        //GetEnumerator
-        public IEnumerator<T> GetEnumerable()
-        {
-            yield return default(T);
         }
 
         //methods
-        public T[] ReplaceArray(T[] replacedList)
+        public T[] ReplaceArray(T[] replacedList, int? removedIndex = null)
         {
-            for (int i = 0; i < Capacity/2; i++)
+            bool hasRemoveMatch = false;
+            for (int i = 0; i < Count; i++)
             {
-                replacedList[i] = NList[i];
+                if (i == removedIndex)
+                {
+                    hasRemoveMatch = true;
+                }
+                else if(hasRemoveMatch)
+                {
+                    replacedList[i - 1] = NList[i];
+                }
+                else
+                {
+                    replacedList[i] = NList[i];
+                }
             }
             return replacedList;
         }
-        public void CheckCapacity()
+        public int CheckCapacity(int? removedIndex = null)
         {
             if (Count >= Capacity/2)
             {
@@ -89,10 +98,16 @@ namespace AlexList
                 T[] replacedList = CreateNewArray();
                 NList = ReplaceArray(replacedList);
             }
+            else if(!(removedIndex == null))
+            {
+                T[] replacedList = CreateNewArray();
+                NList = ReplaceArray(replacedList, removedIndex);
+            }
+            return Capacity;
         }
         public T[] CreateNewArray()
         {
-            T[] replacedList = new T[IncreaseCapacity()];
+            T[] replacedList = new T[Capacity];
             return replacedList; 
         }
         public int IncreaseCapacity()
@@ -106,10 +121,21 @@ namespace AlexList
             Count += 1;
             Index = Count - 1;
             NList[Index] = value;
+            CheckCapacity();
         }
         public bool Remove(T value)
         {
-            return true;
+            for (int i = 0; i < Count; i++)
+            {
+                if(NList[i].Equals(value))
+                {
+                    removedIndex = i;
+                    CheckCapacity(removedIndex);
+                    Count -= 1;
+                    return true;
+                }
+            }
+            return false;
         }
         public void RemoveAt(int value)
         {
@@ -133,8 +159,11 @@ namespace AlexList
         }
 
         public IEnumerator<T> GetEnumerator()
-        {
-            throw new NotImplementedException();
+        {          
+            for(int i = 0; i < Count; i ++)
+            {
+                yield return NList[i];
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()

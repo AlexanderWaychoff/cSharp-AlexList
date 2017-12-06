@@ -66,8 +66,9 @@ namespace AListTests
             //act
             listOfValues.Add(value);
             //assert
-            //Assert.AreEqual(listOfValues[0], value);
+            Assert.AreEqual(listOfValues[0], value);
         }
+        [TestMethod]
         public void Add_CheckIndex1_Index1EqualsValue()
         {
             //arrange
@@ -77,7 +78,18 @@ namespace AListTests
             //act
             listOfValues.Add(value);
             //assert
-           // Assert.AreEqual(listOfValues[1], value);
+            Assert.AreEqual(listOfValues[1], value);
+        }
+        [TestMethod]
+        public void Add_AddObject_GetSpecificInfo()
+        {
+            //arrange
+            AList<ObjectTest> listOfValues = new AList<ObjectTest>();
+            ObjectTest test = new ObjectTest(2, "merfsack");
+            //act
+            listOfValues.Add(test);
+            //assert
+            Assert.AreEqual(listOfValues[0].name, "merfsack");
         }
 
         //program already prevents adding different values
@@ -97,19 +109,21 @@ namespace AListTests
         //}
 
         //AList Count
-        [TestMethod]
-        public void Count_CheckAListLength_CountEqualsAListLength()
-        {
-            //arrange
-            //AList<string> listOfValues = new AList<string>() { "test", "fill" };
-            AList<string> listOfValues = new AList<string>();
-            listOfValues.Add("test");
-            listOfValues.Add("fill");
-            //act
-            int lengthOfAList = listOfValues.Count;
-            //assert
-            Assert.AreEqual(lengthOfAList, 2);
-        }
+
+        //this one is method, next one is property
+        //[TestMethod]
+        //public void Count_CheckAListLength_CountEqualsAListLength()
+        //{
+        //    //arrange
+        //    //AList<string> listOfValues = new AList<string>() { "test", "fill" };
+        //    AList<string> listOfValues = new AList<string>();
+        //    listOfValues.Add("test");
+        //    listOfValues.Add("fill");
+        //    //act
+        //    int lengthOfAList = listOfValues.Count;
+        //    //assert
+        //    Assert.AreEqual(lengthOfAList, 2);
+        //}
         [TestMethod]
         public void Count_PropertyUsageForCount_CountEqualsAListLength()
         {
@@ -118,9 +132,9 @@ namespace AListTests
             listOfValues.Add("test");
             listOfValues.Add("fill");
             //act
-            //int lengthOfAList = listOfValues.Count;
+            int lengthOfAList = listOfValues.Count;
             //assert
-            //Assert.AreEqual(lengthOfAList, 2);
+            Assert.AreEqual(lengthOfAList, 2);
         }
 
         //Alist Remove
@@ -136,7 +150,7 @@ namespace AListTests
             //act
             listOfValues.Remove(removeThis);
             //assert
-            //Assert.AreNotEqual(listOfValues[1], removeThis);
+            Assert.AreNotEqual(listOfValues[1], removeThis);
         }
         [TestMethod]
         public void Remove_RemoveFromAList_KeepValueAtIndex1()
@@ -150,8 +164,9 @@ namespace AListTests
             //act
             listOfValues.Remove(remove);
             //assert
-            //Assert.AreEqual(listOfValues[0], doNotRemove);
+            Assert.AreEqual(listOfValues[0], doNotRemove);
         }
+        [TestMethod]
         public void Remove_DoNotRemove_KeepValueAtIndex0()
         {
             //arrange
@@ -161,8 +176,9 @@ namespace AListTests
             //act
             listOfValues.Remove("remove");
             //assert
-            //Assert.AreEqual(listOfValues[0], doNotRemove);
+            Assert.AreEqual(listOfValues[0], doNotRemove);
         }
+        [TestMethod]
         public void Remove_RemoveFromAList_ReturnTrue()
         {
             //arrange
@@ -177,6 +193,7 @@ namespace AListTests
             //assert
             Assert.IsTrue(hasRemoved);
         }
+        [TestMethod]
         public void Remove_DoNotRemoveFromAList_ReturnFalse()
         {
             //arrange
@@ -191,6 +208,7 @@ namespace AListTests
             //assert
             Assert.IsFalse(hasRemoved);
         }
+        [TestMethod]
         public void Remove_CheckIndex0_ValueIsThere()
         {
             //arrange
@@ -203,9 +221,10 @@ namespace AListTests
             //act
             listOfValues.Remove(removeThis);
             //assert
-            //Assert.AreNotEqual(listOfValues[0], test);
+            Assert.AreEqual(listOfValues[0], test);
         }
-        public void Remove_CheckIndex2_ValueIsThere()
+        [TestMethod]
+        public void Remove_CheckIndex1_ValueFromIndex2IsThere()
         {
             //arrange
             string test = "test";
@@ -217,7 +236,55 @@ namespace AListTests
             //act
             listOfValues.Remove(removeThis);
             //assert
-            //Assert.AreNotEqual(listOfValues[2], test);
+            Assert.AreEqual(listOfValues[1], test);
+        }
+        [TestMethod]
+        public void Remove_CheckCount_CountEquals2()
+        {
+            //arrange
+            string test = "test";
+            string removeThis = "remove";
+            AList<string> listOfValues = new AList<string>();// { "test", removeThis, "fill" };
+            listOfValues.Add("fill");
+            listOfValues.Add(removeThis);
+            listOfValues.Add(test);
+            //act
+            listOfValues.Remove(removeThis);
+            //assert
+            Assert.AreEqual(listOfValues.Count, 2);
+        }
+        [TestMethod]
+        public void Remove_RemoveObject_ObjectIsGone()
+        {
+            //arrange
+            ObjectTest test = new ObjectTest(3, "remove me");
+            AList<ObjectTest> listOfValues = new AList<ObjectTest>();// { "test", removeThis, "fill" };
+            listOfValues.Add(test);
+            //act
+            listOfValues.Remove(test);
+            //assert
+            Assert.AreNotEqual(listOfValues[0], test);
+        }
+
+        //Iterator
+        [TestMethod]
+        public void Iterator_RemoveObject_ObjectIsGone()
+        {
+            //arrange
+            AList<int> listOfValues = new AList<int>() { 1, 2, 3 };
+            AList<int> grabValues = new AList<int>();
+            int grab = 0;
+            //act
+            foreach (var item in listOfValues)
+            {
+                if(item == 2)
+                {
+                    grab = 2;
+                }
+                grabValues.Add(item);
+            }
+            //assert
+            Assert.AreEqual(grabValues[1], grab);
         }
 
         //AList RemoveAt 
@@ -247,7 +314,7 @@ namespace AListTests
             //act
             listOfValues.RemoveAt(1);
             //assert
-            //Assert.AreEqual(listOfValues[1], item);
+            Assert.AreEqual(listOfValues[1], item);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
