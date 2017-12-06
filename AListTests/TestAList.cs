@@ -16,9 +16,9 @@ namespace AListTests
             test.Add(1);
             test.Add(2);
             //act
-            int capacity = test.IncreaseCapacity();
+            test.CheckCapacity();
             //assert
-            Assert.AreEqual(capacity, 6);
+            Assert.AreEqual(test.Capacity, 6);
         }
         [TestMethod]
         public void DetermineCapacity_CapacityIncreasesFromThreshold_Assert12()
@@ -29,9 +29,9 @@ namespace AListTests
             test.Add(2);
             test.Add(3);
             //act
-            int capacity = test.IncreaseCapacity();
+            test.CheckCapacity();
             //assert
-            Assert.AreEqual(capacity, 12);
+            Assert.AreEqual(test.Capacity, 12);
         }
         //Alist AddToList
         [TestMethod]

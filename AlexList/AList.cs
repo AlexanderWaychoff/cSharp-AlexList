@@ -73,23 +73,27 @@ namespace AlexList
         }
 
         //methods
-        public void ReplaceArray(int capacity, T[] replacedList)
+        public T[] ReplaceArray(T[] replacedList)
         {
             for (int i = 0; i < Capacity/2; i++)
             {
                 replacedList[i] = NList[i];
             }
+            return replacedList;
         }
         public void CheckCapacity()
         {
-            if (Index >= Capacity/2)
+            if (Count >= Capacity/2)
             {
-                CreateNewArray();
+                Capacity = IncreaseCapacity();
+                T[] replacedList = CreateNewArray();
+                NList = ReplaceArray(replacedList);
             }
         }
-        public void CreateNewArray()
+        public T[] CreateNewArray()
         {
             T[] replacedList = new T[IncreaseCapacity()];
+            return replacedList; 
         }
         public int IncreaseCapacity()
         {
