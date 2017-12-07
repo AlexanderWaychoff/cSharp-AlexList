@@ -233,7 +233,7 @@ namespace AlexList
                     }
                 }
                 arrangedList.Add(NList[wordValueList.IndexOf(decimalValue)]);
-                this.Remove(NList[wordValueList.IndexOf(decimalValue)]);
+                //this.Remove(NList[wordValueList.IndexOf(decimalValue)]);
                 wordValueList.Remove(decimalValue);
             }
             return arrangedList;
