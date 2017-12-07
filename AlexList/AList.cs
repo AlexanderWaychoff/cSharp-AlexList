@@ -145,6 +145,13 @@ namespace AlexList
             }
             return keepArray;
         }
+        private AList<T> AddTwoLists(AList<T> list1, AList<T> list2)
+        {
+            AList<T> addedLists = new AList<T>();
+            addedLists = CycleAddToList(addedLists, list1);
+            addedLists = CycleAddToList(addedLists, list2);
+            return addedLists;
+        }
         private AList<T> CycleRemoveFromList(AList<T> keepArray, AList<T> cyclingArray)
         {
             for (int i = 0; i < cyclingArray.Count; i++)
@@ -153,12 +160,29 @@ namespace AlexList
             }
             return keepArray;
         }
-        private AList<T> AddTwoLists(AList<T> list1, AList<T> list2)
+        public AList<T> Zip (AList<T> list1, AList<T> list2)
         {
-            AList<T> addedLists = new AList<T>();
-            addedLists = CycleAddToList(addedLists, list1);
-            addedLists = CycleAddToList(addedLists, list2);
-            return addedLists;
+            AList<T> zippedList = new AList<T>();
+            int lengthOfZipper = GetZipCount(list1, list2);
+            for (int i = 0; i < lengthOfZipper; i++)
+            {
+                zippedList.Add(list1[i]);
+                zippedList.Add(list2[i]);
+            }
+            return zippedList;
+        }
+        protected int GetZipCount(AList<T> list1, AList<T> list2)
+        {
+            int grabMinimumCount = 0;
+            if (list1.Count <= list2.Count)
+            {
+                grabMinimumCount = list1.Count;
+            }
+            else
+            {
+                grabMinimumCount = list2.Count;
+            }
+            return grabMinimumCount;
         }
         public void RemoveAt(int value)
         {
@@ -233,7 +257,6 @@ namespace AlexList
                 yield return NList[i];
             }
         }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             for (int i = 0; i < Count; i++)

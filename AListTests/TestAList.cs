@@ -496,6 +496,86 @@ namespace AListTests
             Assert.AreEqual(result.ToString(), "One, Two, Five");
         }
 
+        //Zip method
+        [TestMethod]
+        public void Zip_CombineTwoEqualCountStringLists_VerifyIndex1()
+        {
+            //arrange
+            AList<string> chorusSetOne = new AList<string>() { "Do", "Mi", "So" };
+            AList<string> chorusSetTwo = new AList<string>() { "Re", "Fa", "La" };
+            AList<string> chorusZip = new AList<string>();
+            //act
+            chorusZip = chorusZip.Zip(chorusSetOne, chorusSetTwo);//1, 2, 3, 4, 5, 6
+            //assert
+            Assert.AreEqual(chorusZip[1], "Re");
+        }
+        [TestMethod]
+        public void Zip_CombineTwoEqualCountIntLists_VerifyIndex1()
+        {
+            //arrange
+            AList<int> numbersSetOne = new AList<int>() { 1, 3, 5 };
+            AList<int> numbersSetTwo = new AList<int>() { 2, 4, 6 };
+            AList<int> numbersZip = new AList<int>();
+            //act
+            numbersZip = numbersZip.Zip(numbersSetOne, numbersSetTwo);//1, 2, 3, 4, 5, 6
+            //assert
+            Assert.AreEqual(numbersZip[1], 2);
+        }
+        [TestMethod]
+        public void Zip_CombineTwoEqualCountIntLists_VerifyIndex2()
+        {
+            //arrange
+            AList<int> numbersSetOne = new AList<int>() { 1, 3, 5 };
+            AList<int> numbersSetTwo = new AList<int>() { 2, 4, 6 };
+            AList<int> numbersZip = new AList<int>();
+            //act
+            numbersZip = numbersZip.Zip(numbersSetOne, numbersSetTwo);//1, 2, 3, 4, 5, 6
+            //assert
+            Assert.AreEqual(numbersZip[2], 3);
+        }
+        [TestMethod]
+        public void Zip_CombineTwoDifferentCountIntLists_VerifyIndex5()
+        {
+            //arrange
+            AList<int> numbersSetOne = new AList<int>() { 1, 3, 5 };
+            AList<int> numbersSetTwo = new AList<int>() { 2, 4, 6, 8, 10 };
+            AList<int> numbersZip = new AList<int>();
+            //act
+            numbersZip = numbersZip.Zip(numbersSetOne, numbersSetTwo);//1, 2, 3, 4, 5, 6
+            //assert
+            Assert.AreEqual(numbersZip[5], 6);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Zip_CheckIndexPastZipStop_ThrowOverflow()
+        {
+            //arrange
+            AList<int> numbersSetOne = new AList<int>() { 1, 3, 5 };
+            AList<int> numbersSetTwo = new AList<int>() { 2, 4, 6, 8, 10 };
+            AList<int> numbersZip = new AList<int>();
+            int grab;
+            numbersZip = numbersZip.Zip(numbersSetOne, numbersSetTwo);//1, 2, 3, 4, 5, 6
+            //act
+            grab = numbersZip[6];//tries to grab 8
+            //assert
+            
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Zip_CheckIndexPastZipStopSwitchedOrder_ThrowOverflow()
+        {
+            //arrange
+            AList<int> numbersSetOne = new AList<int>() { 1, 3, 5 };
+            AList<int> numbersSetTwo = new AList<int>() { 2, 4, 6, 8, 10 };
+            AList<int> numbersZip = new AList<int>();
+            int grab;
+            numbersZip = numbersZip.Zip(numbersSetTwo, numbersSetOne);//1, 2, 3, 4, 5, 6
+            //act
+            grab = numbersZip[6];//tries to grab 8
+            //assert
+
+        }
+
         //AList RemoveAt 
         [TestMethod]
         public void RemoveAt_RemoveFromSpecificIndex_Index1Changes()
