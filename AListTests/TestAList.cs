@@ -287,6 +287,21 @@ namespace AListTests
             //assert
             Assert.AreEqual(grabValues[1], grab);
         }
+        [TestMethod]
+        public void Iterator_CheckCount_EqualsCount()
+        {
+            //arrange
+            AList<int> listOfValues = new AList<int>() { 1, 2, 3 };
+            int count = 0;
+            //act
+            foreach (var item in listOfValues)
+            {
+                count += 1;
+            }
+            //assert
+            Assert.AreEqual(listOfValues.Count, count);
+        }
+
 
         //Override ToString
         [TestMethod]
@@ -302,6 +317,75 @@ namespace AListTests
             grab = tests[0].ToString();
             //assert
             Assert.AreEqual(grab, "1");
+        }
+        [TestMethod]
+        public void ToString_TestOneIndex_EqualsStringValueOfIndex0()
+        {
+            //arrange
+            AList<int> tests = new AList<int>() { 1, 2, 3, 4 };
+            string grab;
+            //act
+            grab = tests[0].ToString();
+            //assert
+            Assert.AreEqual(grab, "1");
+        }
+        [TestMethod]
+        public void ToString_TestOneIndex_EqualsStringValueOfIndex3()
+        {
+            //arrange
+            AList<int> tests = new AList<int>() { 1, 2, 3, 4 };
+            string grab;
+            //act
+            grab = tests[3].ToString();
+            //assert
+            Assert.AreEqual(grab, "4");
+        }
+        [TestMethod]
+        public void ToString_OverrideWholeArray_EqualsStringValueOfEntireArray()
+        {
+            //arrange
+            AList<int> tests = new AList<int>() { 1, 2, 3, 4 };
+            string grab;
+            //act
+            grab = tests.ToString();
+            //assert
+            Assert.AreEqual(grab, "1, 2, 3, 4");
+        }
+        //test for overload method; assignment requires override for ToString
+        //[TestMethod]
+        //public void ToString_OverloadWholeArray_EqualsStringValueOfEntireArrayAndSeperatorInParameterIsTheSame()
+        //{
+        //    //arrange
+        //    AList<int> tests = new AList<int>() { 1, 2, 3, 4 };
+        //    string grab;
+        //    //act
+        //    grab = tests.ToString("..");
+        //    //assert
+        //    Assert.AreEqual(grab, "1..2..3..4");
+        //}
+
+        //overload + operator +++++++++
+        [TestMethod]
+        public void OverloadAddition_Add2Integers_ResultIsCorrect()
+        {
+            //arrange
+            int number = 2;
+            int result = 0;
+            //act
+            result = number + number;
+            //assert
+            Assert.AreEqual(result, 4);
+        }
+        [TestMethod]
+        public void OverloadAddition_Add2Strings_SeeWhatResultIs()
+        {
+            //arrange
+            string number = "2";
+            string result;
+            //act
+            result = number + number;
+            //assert
+            Assert.AreEqual(result, "22");
         }
 
         //AList RemoveAt 

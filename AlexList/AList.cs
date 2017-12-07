@@ -159,8 +159,37 @@ namespace AlexList
         }
         public override string ToString()
         {
+            String arrayItems = String.Empty;
+            foreach (var item in this)
+            {
+                if (String.IsNullOrEmpty(arrayItems))
+                {
+                    arrayItems += item.ToString();
+                }
+                else
+                {
+                    arrayItems += String.Format(", {0}", item);
+                }
+            }
             return base.ToString();
         }
+        //to overload, not override, string; specifically need override
+        //public string ToString(string seperator = ", ")
+        //{
+        //    String arrayItems = String.Empty;
+        //    foreach (var item in this)
+        //    {
+        //        if (String.IsNullOrEmpty(arrayItems))
+        //        {
+        //            arrayItems += item.ToString();
+        //        }
+        //        else
+        //        {
+        //            arrayItems += String.Format("{0}{1}", seperator, item);
+        //        }
+        //    }
+        //    return arrayItems;
+        //}
 
         public IEnumerator<T> GetEnumerator()
         {          
@@ -172,7 +201,10 @@ namespace AlexList
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Count; i++)
+            {
+                yield return NList[i];
+            }
         }
     }
 }
