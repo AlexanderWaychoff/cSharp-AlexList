@@ -597,9 +597,9 @@ namespace AListTests
             //arrange
             AList<string> arrangeList = new AList<string>() { "dog", "hamster", "cat", "fish" };
             //act
-            arrangeList.Arrange();//AlphabeticallyA
+            arrangeList = arrangeList.Arrange();//AlphabeticallyA
             //assert
-            Assert.AreEqual(arrangeList[0], "cat");
+            Assert.AreEqual(arrangeList[3], "cat");
         }
         [TestMethod]
         public void Arrange_AlphabeticallyZtoA_VerifyIndex0()

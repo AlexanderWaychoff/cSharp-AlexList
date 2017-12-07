@@ -221,18 +221,20 @@ namespace AlexList
         public AList<T> AlphabeticallyA (AList<decimal> wordValueList)
         {
             AList<T> arrangedList = new AList<T>();
-            for (int j = 0; j < Count; j++)
+            for (int j = 0; j < this.Count; j++)
             {
-                string checkedValue = "0.001";
+                string checkedValue = "0.301";
                 decimal decimalValue = Convert.ToDecimal(checkedValue);
                 for (int i = 0; i < wordValueList.Count; i++)
                 {
-                    if (decimalValue < wordValueList[i])
+                    if (decimalValue > wordValueList[i])
                     {
                         decimalValue = wordValueList[i];
                     }
                 }
                 arrangedList.Add(NList[wordValueList.IndexOf(decimalValue)]);
+                this.Remove(NList[wordValueList.IndexOf(decimalValue)]);
+                wordValueList.Remove(decimalValue);
             }
             return arrangedList;
         }
