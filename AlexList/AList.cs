@@ -184,6 +184,17 @@ namespace AlexList
             }
             return grabMinimumCount;
         }
+        /// <summary>
+        /// Sorts your list in a specific order.
+        /// </summary>
+        /// <param name = "AlphabeticallyA"></param>
+        /// <param name = "AlphabeticallyZ"></param>
+        /// <param name = "NumericalLowToHigh"></param>
+        /// <param name = "NumericalHighToLow"></param>
+        public void Arrange()
+        {
+
+        }
         public void RemoveAt(int value)
         {
 
