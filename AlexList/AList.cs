@@ -200,14 +200,17 @@ namespace AlexList
         public AList<T> Arrange()
         {
             AList<T> arrangedList = new AList<T>();
+            AList<string> wordValueList = new AList<string>();
             T item;
             for (int i = 0; i < Count; i++)
             {
+                string wordValue = "";
                 item = NList[i];
                 foreach (char C in item.ToString().ToLower())
                 {
-                    //KeyboardValues.alphaValue[KeyboardValues.alphaChar.IndexOf(C.ToString())];
+                    wordValue += KeyboardValues.alphaValue[KeyboardValues.alphaChar.IndexOf(C.ToString())];
                 }
+                wordValueList.Add("0." + wordValue);
             }
             return arrangedList;
         }
