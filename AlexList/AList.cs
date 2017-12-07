@@ -50,7 +50,7 @@ namespace AlexList
                 index = value;
             }
         }
-        public int Capacity
+        protected int Capacity
         {
             get
             {
@@ -70,7 +70,7 @@ namespace AlexList
         }
 
         //methods
-        public T[] ReplaceArray(T[] replacedList, int? removedIndex = null)
+        private T[] ReplaceArray(T[] replacedList, int? removedIndex = null)
         {
             bool hasRemoveMatch = false;
             for (int i = 0; i < Count; i++)
@@ -90,7 +90,7 @@ namespace AlexList
             }
             return replacedList;
         }
-        public int CheckCapacity(int? removedIndex = null)
+        protected int CheckCapacity(int? removedIndex = null)
         {
             if (Count >= Capacity/2)
             {
@@ -105,12 +105,12 @@ namespace AlexList
             }
             return Capacity;
         }
-        public T[] CreateNewArray()
+        private T[] CreateNewArray()
         {
             T[] replacedList = new T[Capacity];
             return replacedList; 
         }
-        public int IncreaseCapacity()
+        private int IncreaseCapacity()
         {
             int capacity = Capacity;
             capacity *= 2;
@@ -142,6 +142,14 @@ namespace AlexList
             for(int i = 0; i < cyclingArray.Count; i++)
             {
                 keepArray.Add(cyclingArray[i]);
+            }
+            return keepArray;
+        }
+        private AList<T> CycleRemoveFromList(AList<T> keepArray, AList<T> cyclingArray)
+        {
+            for (int i = 0; i < cyclingArray.Count; i++)
+            {
+                keepArray.Remove(cyclingArray[i]);
             }
             return keepArray;
         }
@@ -192,6 +200,12 @@ namespace AlexList
         {
             AList<T> combinedLists = new AList<T>();
             combinedLists = combinedLists.AddTwoLists(list1, list2);
+            return combinedLists;
+        }
+        public static AList<T> operator -(AList<T> list1, AList<T> list2)
+        {
+            AList<T> combinedLists = new AList<T>();
+            combinedLists = combinedLists.CycleRemoveFromList(list1, list2);
             return combinedLists;
         }
         //to overload, not override, string; specifically need override
