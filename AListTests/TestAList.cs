@@ -422,17 +422,20 @@ namespace AListTests
             Assert.AreEqual(result, 5);
         }
         [TestMethod]
-        public void OverloadAddition_Add2IntAListTogether_SeeWhatResultIs()
+        public void OverloadAddition_Add2IntAListTogether_NewArrayWithValuesInOrderAdded()
         {
             //arrange
             AList<int> numbersOdd = new AList<int>() { 1, 3, 5 };
             AList<int> numbersEven = new AList<int>() { 2, 4, 6 };
             AList<int> result = new AList<int>();
             //act
-            //result = numbersOdd + numbersEven;
+            result = numbersOdd + numbersEven;
             //assert
-            //Assert.AreEqual(result.ToString, "1, 3, 5, 2, 4, 6";
+            Assert.AreEqual(result.ToString(), "1, 3, 5, 2, 4, 6");
         }
+
+        //- operator(subtraction) --------------
+
 
         //AList RemoveAt 
         [TestMethod]

@@ -137,6 +137,21 @@ namespace AlexList
             }
             return false;
         }
+        private AList<T> CycleAddToList (AList<T> keepArray, AList<T> cyclingArray)
+        {
+            for(int i = 0; i < cyclingArray.Count; i++)
+            {
+                keepArray.Add(cyclingArray[i]);
+            }
+            return keepArray;
+        }
+        private AList<T> AddTwoLists(AList<T> list1, AList<T> list2)
+        {
+            AList<T> addedLists = new AList<T>();
+            addedLists = CycleAddToList(addedLists, list1);
+            addedLists = CycleAddToList(addedLists, list2);
+            return addedLists;
+        }
         public void RemoveAt(int value)
         {
 
@@ -172,6 +187,12 @@ namespace AlexList
                 }
             }
             return arrayItems;
+        }
+        public static AList<T> operator +(AList<T> list1, AList<T> list2)
+        {
+            AList<T> combinedLists = new AList<T>();
+            combinedLists = combinedLists.AddTwoLists(list1, list2);
+            return combinedLists;
         }
         //to overload, not override, string; specifically need override
         //public string ToString(string seperator = ", ")
