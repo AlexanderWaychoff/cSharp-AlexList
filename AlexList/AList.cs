@@ -171,7 +171,7 @@ namespace AlexList
                     arrayItems += String.Format(", {0}", item);
                 }
             }
-            return base.ToString();
+            return arrayItems;
         }
         //to overload, not override, string; specifically need override
         //public string ToString(string seperator = ", ")
