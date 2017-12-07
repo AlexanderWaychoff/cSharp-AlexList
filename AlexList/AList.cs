@@ -15,7 +15,6 @@ namespace AlexList
         {
             public static AList<string> alphaChar = new AList<string>() { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
             public static AList<string> alphaValue = new AList<string>() { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26" };
-            public static string a = "01";
         }
         private T[] NList;
         private int startingCapacity = 6;
@@ -200,17 +199,40 @@ namespace AlexList
         public AList<T> Arrange()
         {
             AList<T> arrangedList = new AList<T>();
-            AList<string> wordValueList = new AList<string>();
+            AList<decimal> wordValueList = new AList<decimal>();
             T item;
             for (int i = 0; i < Count; i++)
             {
                 string wordValue = "";
+                int cap = 0;
                 item = NList[i];
                 foreach (char C in item.ToString().ToLower())
                 {
-                    wordValue += KeyboardValues.alphaValue[KeyboardValues.alphaChar.IndexOf(C.ToString())];
+                    cap += 1;
+                    if (cap < 14)//28 digits is max storage of decimal
+                    {
+                        wordValue += KeyboardValues.alphaValue[KeyboardValues.alphaChar.IndexOf(C.ToString())];
+                    }
                 }
-                wordValueList.Add("0." + wordValue);
+                wordValueList.Add(Convert.ToDecimal("0." + wordValue));
+            }
+            return AlphabeticallyA(wordValueList);
+        }
+        public AList<T> AlphabeticallyA (AList<decimal> wordValueList)
+        {
+            AList<T> arrangedList = new AList<T>();
+            for (int j = 0; j < Count; j++)
+            {
+                string checkedValue = "0.001";
+                decimal decimalValue = Convert.ToDecimal(checkedValue);
+                for (int i = 0; i < wordValueList.Count; i++)
+                {
+                    if (decimalValue < wordValueList[i])
+                    {
+                        decimalValue = wordValueList[i];
+                    }
+                }
+                arrangedList.Add(NList[wordValueList.IndexOf(decimalValue)]);
             }
             return arrangedList;
         }
@@ -240,6 +262,10 @@ namespace AlexList
                 }
             }
             return -1;
+        }
+        public T IndexAt(int placement)
+        {
+            return NList[placement];
         }
         public override string ToString()
         {
