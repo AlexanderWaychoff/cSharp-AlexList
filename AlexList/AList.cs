@@ -11,6 +11,12 @@ namespace AlexList
 {
     public class AList<T> : IEnumerable<T>
     {
+        protected static class KeyboardValues
+        {
+            public static AList<string> alphaChar = new AList<string>() { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+            public static AList<string> alphaValue = new AList<string>() { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26" };
+            public static string a = "01";
+        }
         private T[] NList;
         private int startingCapacity = 6;
         private int count = 0;
@@ -191,9 +197,19 @@ namespace AlexList
         /// <param name = "AlphabeticallyZ"></param>
         /// <param name = "NumericalLowToHigh"></param>
         /// <param name = "NumericalHighToLow"></param>
-        public void Arrange()
+        public AList<T> Arrange()
         {
-
+            AList<T> arrangedList = new AList<T>();
+            T item;
+            for (int i = 0; i < Count; i++)
+            {
+                item = NList[i];
+                foreach (char C in item.ToString().ToLower())
+                {
+                    //KeyboardValues.alphaValue[KeyboardValues.alphaChar.IndexOf(C.ToString())];
+                }
+            }
+            return arrangedList;
         }
         public void RemoveAt(int value)
         {
@@ -211,9 +227,16 @@ namespace AlexList
         {
 
         }
-        public T IndexOf(int i)
+        public int IndexOf(T item)
         {
-            return NList[i];
+            for (int i = 0; i < Count; i++)
+            {
+                if(this[i].Equals(item))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
         public override string ToString()
         {

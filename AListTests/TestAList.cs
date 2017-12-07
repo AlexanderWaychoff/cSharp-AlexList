@@ -592,16 +592,45 @@ namespace AListTests
 
         //Arrange
         [TestMethod]
-        public void Arrange_AlphabeticallyAtoZ_VerifyIndex1()
+        public void Arrange_AlphabeticallyAtoZ_VerifyIndex0()
         {
             //arrange
             AList<string> arrangeList = new AList<string>() { "dog", "hamster", "cat", "fish" };
             //act
-            arrangeList.Arrange();
+            arrangeList.Arrange();//AlphabeticallyA
             //assert
             Assert.AreEqual(arrangeList[0], "cat");
         }
-
+        [TestMethod]
+        public void Arrange_AlphabeticallyZtoA_VerifyIndex0()
+        {
+            //arrange
+            AList<string> arrangeList = new AList<string>() { "dog", "hamster", "cat", "fish" };
+            //act
+            arrangeList.Arrange();//AlphabeticallyZ
+            //assert
+            Assert.AreEqual(arrangeList[0], "hamster");
+        }
+        [TestMethod]
+        public void Arrange_NumericallyLowToHigh_VerifyIndex0()
+        {
+            //arrange
+            AList<int> arrangeList = new AList<int>() { 25, 13, 17, 21 };
+            //act
+            arrangeList.Arrange();//NumericallyLowToHigh
+            //assert
+            Assert.AreEqual(arrangeList[0], 13);
+        }
+        [TestMethod]
+        public void Arrange_NumericallyHighToLow_VerifyIndex1()
+        {
+            //arrange
+            AList<int> arrangeList = new AList<int>() { 25, 13, 17, 21 };
+            //act
+            arrangeList.Arrange();//NumericallyHighToLow
+            //assert
+            Assert.AreEqual(arrangeList[0], 21);
+        }
 
         //AList RemoveAt 
         [TestMethod]
@@ -734,10 +763,11 @@ namespace AListTests
             listOfValues.Add(value);
             listOfValues.Add("fill");
             listOfValues.Add("fill");
+            int test;
             //act
-            string test = listOfValues.IndexOf(0);
+            test = listOfValues.IndexOf("Expected value");
             //assert
-            //Assert.AreEqual(listOfValues[0], value);
+            Assert.AreEqual(test, 0);
         }
         [TestMethod]
         public void IndexOf_CheckIndex1_AListIndex1EqualsValue()
@@ -748,22 +778,24 @@ namespace AListTests
             listOfValues.Add("fill");
             listOfValues.Add(value);
             listOfValues.Add("fill");
+            int test;
             //act
-            string test = listOfValues.IndexOf(1);
+            test = listOfValues.IndexOf("Expected value");
             //assert
-            //Assert.AreEqual(listOfValues[1], value);
+            Assert.AreEqual(test, 1);
         }
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void IndexOf_CheckIndex5_ThrowException()
+        public void IndexOf_CheckUnusedWord_ReturnNegativeOne()
         {
             //arrange
             AList<string> listOfValues = new AList<string>();
             listOfValues.Add("fill");
             listOfValues.Add("fill");
+            int test;
             //act
-            string test = listOfValues.IndexOf(5);
+            test = listOfValues.IndexOf("spill");
             //assert
+            Assert.AreEqual(test, -1);
         }
     }
 }
