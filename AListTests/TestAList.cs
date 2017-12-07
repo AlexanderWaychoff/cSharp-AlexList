@@ -305,12 +305,12 @@ namespace AListTests
 
         //Override ToString
         [TestMethod]
-        public void ToString_ObserveEffects_UnderstandWhatHappens()
+        public void ToString_ObserveEffectsWithList_UnderstandWhatHappens()
         {
             //arrange
             //AList<int> listOfValues = new AList<int>() { 1, 2, 3 };
             List<int> tests = new List<int>() { 1, 2, 3, 4 };
-            int test = 2;
+            //int test = 2;
             string grab;
             //act
             //grab = listOfValues.ToString();
@@ -351,7 +351,7 @@ namespace AListTests
             //assert
             Assert.AreEqual(grab, "1, 2, 3, 4");
         }
-        //test for overload method; assignment requires override for ToString
+        //test for overload ToString method; assignment requires override for ToString
         //[TestMethod]
         //public void ToString_OverloadWholeArray_EqualsStringValueOfEntireArrayAndSeperatorInParameterIsTheSame()
         //{
@@ -377,7 +377,7 @@ namespace AListTests
             Assert.AreEqual(result, 4);
         }
         [TestMethod]
-        public void OverloadAddition_Add2Strings_SeeWhatResultIs()
+        public void OverloadAddition_Add2Strings_StringsCombine()
         {
             //arrange
             string number = "2";
@@ -386,6 +386,52 @@ namespace AListTests
             result = number + number;
             //assert
             Assert.AreEqual(result, "22");
+        }
+        [TestMethod]
+        public void OverloadAddition_Add2StringsFrom2Lists_StringsCombine()
+        {
+            //arrange
+            AList<string> numberOne = new AList<string>() { "2" };
+            AList<string> numberTwo = new AList<string>() { "3" };
+            string result;
+            //act
+            result = numberOne[0] + numberTwo[0];
+            //assert
+            Assert.AreEqual(result, "23");
+        }
+        [TestMethod]
+        public void OverloadAddition_Add2StringsFromSameList_SeeWhatResultIs()
+        {
+            //arrange
+            AList<string> numbers = new AList<string>() { "2", "3" };
+            string result;
+            //act
+            result = numbers[0] + numbers[1];
+            //assert
+            Assert.AreEqual(result, "23");
+        }
+        [TestMethod]
+        public void OverloadAddition_Add2IntFromSameList_ResultIsCorrect()
+        {
+            //arrange
+            AList<int> numbers = new AList<int>() { 2, 3 };
+            int result;
+            //act
+            result = numbers[0] + numbers[1];
+            //assert
+            Assert.AreEqual(result, 5);
+        }
+        [TestMethod]
+        public void OverloadAddition_Add2IntAListTogether_SeeWhatResultIs()
+        {
+            //arrange
+            AList<int> numbersOdd = new AList<int>() { 1, 3, 5 };
+            AList<int> numbersEven = new AList<int>() { 2, 4, 6 };
+            AList<int> result = new AList<int>();
+            //act
+            //result = numbersOdd + numbersEven;
+            //assert
+            //Assert.AreEqual(result.ToString, "1, 3, 5, 2, 4, 6";
         }
 
         //AList RemoveAt 
