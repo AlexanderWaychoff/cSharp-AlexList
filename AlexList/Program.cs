@@ -10,9 +10,11 @@ namespace AlexList
     {
         static void Main(string[] args)
         {
-            AList<string> arrangeList = new AList<string>() { "dog", "hamster", "cat", "fish" };
+            string item = "Expected value";
+            AList<string> listOfValues = new AList<string>();
+            listOfValues.Add(item);
             //act
-            arrangeList = arrangeList.Arrange();//AlphabeticallyA
+            listOfValues.Insert(0, "fill");
         }
     }
 }

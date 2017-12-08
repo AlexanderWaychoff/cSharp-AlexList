@@ -269,7 +269,7 @@ namespace AListTests
 
         //Iterator
         [TestMethod]
-        public void Iterator_RemoveObject_ObjectIsGone()
+        public void Iterator_GrabObject_ObjectIsCorrect()
         {
             //arrange
             AList<int> listOfValues = new AList<int>() { 1, 2, 3 };
@@ -599,7 +599,7 @@ namespace AListTests
             //act
             arrangeList = arrangeList.Arrange();//AlphabeticallyA
             //assert
-            Assert.AreEqual(arrangeList[3], "cat");
+            Assert.AreEqual(arrangeList[1], "cat");
         }
         [TestMethod]
         public void Arrange_AlphabeticallyZtoA_VerifyIndex0()
@@ -699,7 +699,7 @@ namespace AListTests
             //act
             listOfValues.Insert(0, item);
             //assert
-            //Assert.AreEqual(listOfValues[0], item);
+            Assert.AreEqual(listOfValues[0], item);
         }
         [TestMethod]
         public void Insert_PutValueAtIndex0_AListIndex1IsThere()
@@ -711,7 +711,7 @@ namespace AListTests
             //act
             listOfValues.Insert(0, "fill");
             //assert
-            //Assert.AreEqual(listOfValues[1], item);
+            Assert.AreEqual(listOfValues[1], item);
         }
         [TestMethod]
         public void Insert_PutValueAtIndex1_AListIndex0IsThere()
@@ -724,7 +724,7 @@ namespace AListTests
             //act
             listOfValues.Insert(1, "fill");
             //assert
-            //Assert.AreEqual(listOfValues[0], item);
+            Assert.AreEqual(listOfValues[0], item);
         }
         [TestMethod]
         public void Insert_PutValueAtIndex1_AListIndex2IsThere()
@@ -737,7 +737,7 @@ namespace AListTests
             //act
             listOfValues.Insert(1, "fill");
             //assert
-            //Assert.AreEqual(listOfValues[2], item);
+            Assert.AreEqual(listOfValues[2], item);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]

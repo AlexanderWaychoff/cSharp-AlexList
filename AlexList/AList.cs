@@ -234,7 +234,7 @@ namespace AlexList
                 }
                 arrangedList.Add(NList[wordValueList.IndexOf(decimalValue)]);
                 //this.Remove(NList[wordValueList.IndexOf(decimalValue)]);
-                wordValueList.Remove(decimalValue);
+                wordValueList.Insert(wordValueList.IndexOf(decimalValue), Convert.ToDecimal(checkedValue));
             }
             return arrangedList;
         }
@@ -250,9 +250,30 @@ namespace AlexList
         {
 
         }
-        public void Insert(int i, T value)
+        public void Insert(int index, T value)
         {
-
+            if(index >= Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            for (int i = 0; i < Count; i++)
+            {
+                if (i == index)
+                {
+                    for (int j = Count + 1; j > index + 1; j--)
+                    {
+                        this[j - 1] = this[j - 2];
+                    }
+                    Count += 1;
+                    CheckCapacity();
+                    i += Count;
+                    this[index] = value;
+                }
+                else
+                {
+                    this.Add(value);
+                }
+            }
         }
         public int IndexOf(T item)
         {
