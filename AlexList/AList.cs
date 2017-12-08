@@ -190,35 +190,70 @@ namespace AlexList
             return grabMinimumCount;
         }
         /// <summary>
-        /// Sorts your list in a specific order.
+        /// Sorts your list in numerical order, starting with the lowest number.
         /// </summary>
-        /// <param name = "AlphabeticallyA"></param>
-        /// <param name = "AlphabeticallyZ"></param>
-        /// <param name = "NumericalLowToHigh"></param>
-        /// <param name = "NumericalHighToLow"></param>
-        public AList<T> Arrange()
+        //public AList<T> ArrangeNumerically()
+        //{
+        //    if (typeof(T) == typeof(string))
+        //    {
+        //        throw new NotFiniteNumberException();
+        //    }
+        //    else
+        //    {
+        //        AList<T> arrangedList = new AList<T>();
+
+        //        for (int j = 0; j < this.Count; j++)
+        //        {
+        //            T numberValue = this[j];
+        //            for (int i = 0; i < Count; i++)
+        //            {
+        //                if (this[j].CompareTo(this[i]) < 0)
+        //                {
+        //                    numberValue = this[i];
+        //                }
+        //            }
+        //            //CompareTo
+        //            arrangedList.Add(NList[wordValueList.IndexOf(decimalValue)]);
+        //            //this.Remove(NList[wordValueList.IndexOf(decimalValue)]);
+        //            wordValueList[wordValueList.IndexOf(decimalValue)] = Convert.ToDecimal(checkedValue);
+        //        }
+
+        //        return arrangedList;
+        //    }
+        //}
+        /// <summary>
+        /// Sorts your list in alphabetical order, starting with the letter 'A'.
+        /// </summary>
+        public AList<T> ArrangeAlphabetically()
         {
-            AList<T> arrangedList = new AList<T>();
-            AList<decimal> wordValueList = new AList<decimal>();
-            T item;
-            for (int i = 0; i < Count; i++)
+            if (typeof(T) != typeof(string))
             {
-                string wordValue = "";
-                int cap = 0;
-                item = NList[i];
-                foreach (char C in item.ToString().ToLower())
-                {
-                    cap += 1;
-                    if (cap < 14)//28 digits is max storage of decimal
-                    {
-                        wordValue += KeyboardValues.alphaValue[KeyboardValues.alphaChar.IndexOf(C.ToString())];
-                    }
-                }
-                wordValueList.Add(Convert.ToDecimal("0." + wordValue));
+                throw new NotSupportedException();
             }
-            return AlphabeticallyA(wordValueList);
+            else
+            {
+                AList<T> arrangedList = new AList<T>();
+                AList<decimal> wordValueList = new AList<decimal>();
+                T item;
+                for (int i = 0; i < Count; i++)
+                {
+                    string wordValue = "";
+                    int cap = 0;
+                    item = NList[i];
+                    foreach (char C in item.ToString().ToLower())
+                    {
+                        cap += 1;
+                        if (cap < 14)//28 digits is max storage of decimal, each letter needs 2 digits
+                        {
+                            wordValue += KeyboardValues.alphaValue[KeyboardValues.alphaChar.IndexOf(C.ToString())];
+                        }
+                    }
+                    wordValueList.Add(Convert.ToDecimal("0." + wordValue));
+                }
+                return Alphabetically(wordValueList);
+            }
         }
-        public AList<T> AlphabeticallyA (AList<decimal> wordValueList)
+        private AList<T> Alphabetically (AList<decimal> wordValueList)
         {
             AList<T> arrangedList = new AList<T>();
             for (int j = 0; j < this.Count; j++)
@@ -234,7 +269,7 @@ namespace AlexList
                 }
                 arrangedList.Add(NList[wordValueList.IndexOf(decimalValue)]);
                 //this.Remove(NList[wordValueList.IndexOf(decimalValue)]);
-                wordValueList.Insert(wordValueList.IndexOf(decimalValue), Convert.ToDecimal(checkedValue));
+                wordValueList[wordValueList.IndexOf(decimalValue)] = Convert.ToDecimal(checkedValue);
             }
             return arrangedList;
         }

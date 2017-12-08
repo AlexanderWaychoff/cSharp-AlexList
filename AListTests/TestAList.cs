@@ -592,101 +592,111 @@ namespace AListTests
 
         //Arrange
         [TestMethod]
-        public void Arrange_AlphabeticallyAtoZ_VerifyIndex0()
+        public void Arrange_Alphabetically_VerifyIndex0()
         {
             //arrange
             AList<string> arrangeList = new AList<string>() { "dog", "hamster", "cat", "fish" };
             //act
-            arrangeList = arrangeList.Arrange();//AlphabeticallyA
+            arrangeList = arrangeList.ArrangeAlphabetically();//AlphabeticallyA
             //assert
-            Assert.AreEqual(arrangeList[1], "cat");
+            Assert.AreEqual(arrangeList[0], "cat");
         }
         [TestMethod]
-        public void Arrange_AlphabeticallyZtoA_VerifyIndex0()
+        public void Arrange_Alphabetically_VerifyIndex2()
         {
             //arrange
             AList<string> arrangeList = new AList<string>() { "dog", "hamster", "cat", "fish" };
             //act
-            arrangeList.Arrange();//AlphabeticallyZ
+            arrangeList = arrangeList.ArrangeAlphabetically();//AlphabeticallyA
             //assert
-            Assert.AreEqual(arrangeList[0], "hamster");
+            Assert.AreEqual(arrangeList[2], "fish");
         }
         [TestMethod]
-        public void Arrange_NumericallyLowToHigh_VerifyIndex0()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void Arrange_Alphabetically_NotStringException()
         {
             //arrange
             AList<int> arrangeList = new AList<int>() { 25, 13, 17, 21 };
             //act
-            arrangeList.Arrange();//NumericallyLowToHigh
+            arrangeList.ArrangeAlphabetically();//NumericallyHighToLow
             //assert
-            Assert.AreEqual(arrangeList[0], 13);
         }
-        [TestMethod]
-        public void Arrange_NumericallyHighToLow_VerifyIndex1()
-        {
-            //arrange
-            AList<int> arrangeList = new AList<int>() { 25, 13, 17, 21 };
-            //act
-            arrangeList.Arrange();//NumericallyHighToLow
-            //assert
-            Assert.AreEqual(arrangeList[0], 21);
-        }
+        //[TestMethod]
+        //public void Arrange_Numerically_VerifyIndex1()
+        //{
+        //    //arrange
+        //    AList<int> arrangeList = new AList<int>() { 25, 13, 17, 21 };
+        //    //act
+        //    arrangeList.ArrangeNumerically();//NumericallyHighToLow
+        //    //assert
+        //    Assert.AreEqual(arrangeList[1], 17);
+        //}
+        //[TestMethod]
+        //[ExpectedException(typeof(NotFiniteNumberException))]
+        //public void Arrange_Numerically_StringException()
+        //{
+        //    //arrange
+        //    AList<string> arrangeList = new AList<string>() { "25", "13", "17", "21" };
+        //    //act
+        //    arrangeList.ArrangeNumerically();//NumericallyHighToLow
+        //    //assert
+        //}
 
         //AList RemoveAt 
-        [TestMethod]
-        public void RemoveAt_RemoveFromSpecificIndex_Index1Changes()
-        {
-            //arrange
-            string item = "Expected to be removed";
-            AList<string> listOfValues = new AList<string>();// { "test", item, "fill" };
-            listOfValues.Add("test");
-            listOfValues.Add(item);
-            listOfValues.Add("fill");
-            //act
-            listOfValues.RemoveAt(1);
-            //assert
-           // Assert.AreNotEqual(listOfValues[1], item);
-        }
-        [TestMethod]
-        public void RemoveAt_RemoveFromSpecificIndex_Index1IsWhatIndex2ValueWas()
-        {
-            //arrange
-            string item = "Expected value";
-            AList<string> listOfValues = new AList<string>();// { "test", "fill", item };
-            listOfValues.Add("test");
-            listOfValues.Add("fill");
-            listOfValues.Add(item);
-            //act
-            listOfValues.RemoveAt(1);
-            //assert
-            Assert.AreEqual(listOfValues[1], item);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void RemoveAt_RemoveFromAList_ExceptionCheckingPastLength()
-        {
-            //arrange
-            AList<string> listOfValues = new AList<string>();// { "test", "fill" };
-            listOfValues.Add("test");
-            listOfValues.Add("fill");
-            //act
-            listOfValues.RemoveAt(5);
-            //assert
-        }
+        //[TestMethod]
+        //public void RemoveAt_RemoveFromSpecificIndex_Index1Changes()
+        //{
+        //    //arrange
+        //    string item = "Expected to be removed";
+        //    AList<string> listOfValues = new AList<string>();// { "test", item, "fill" };
+        //    listOfValues.Add("test");
+        //    listOfValues.Add(item);
+        //    listOfValues.Add("fill");
+        //    //act
+        //    listOfValues.RemoveAt(1);
+        //    //assert
+        //    Assert.AreNotEqual(listOfValues[1], item);
+        //}
+        //[TestMethod]
+        //public void RemoveAt_RemoveFromSpecificIndex_Index1IsWhatIndex2ValueWas()
+        //{
+        //    //arrange
+        //    string item = "Expected value";
+        //    AList<string> listOfValues = new AList<string>();// { "test", "fill", item };
+        //    listOfValues.Add("test");
+        //    listOfValues.Add("fill");
+        //    listOfValues.Add(item);
+        //    //act
+        //    listOfValues.RemoveAt(1);
+        //    //assert
+        //    Assert.AreEqual(listOfValues[1], item);
+        //}
+        //[TestMethod]
+        //[ExpectedException(typeof(ArgumentOutOfRangeException))]
+        //public void RemoveAt_RemoveFromAList_ExceptionCheckingPastLength()
+        //{
+        //    //arrange
+        //    AList<string> listOfValues = new AList<string>();// { "test", "fill" };
+        //    listOfValues.Add("test");
+        //    listOfValues.Add("fill");
+        //    //act
+        //    listOfValues.RemoveAt(5);
+        //    //assert
+        //}
 
-        //AList Clear
-        [TestMethod]
-        public void Clear_ClearsList_AListHasNoValue()
-        {
-            //arrange
-            string item = "Remove this";
-            AList<string> listOfValues = new AList<string>();// { item };
-            listOfValues.Add(item);
-            //act
-            listOfValues.Clear();
-            //assert
-            Assert.AreEqual(listOfValues.Count, 0);
-        }
+        ////AList Clear
+        //[TestMethod]
+        //public void Clear_ClearsList_AListHasNoValue()
+        //{
+        //    //arrange
+        //    string item = "Remove this";
+        //    AList<string> listOfValues = new AList<string>();// { item };
+        //    listOfValues.Add(item);
+        //    //act
+        //    listOfValues.Clear();
+        //    //assert
+        //    Assert.AreEqual(listOfValues.Count, 0);
+        //}
 
         //AList Insert
         [TestMethod]
